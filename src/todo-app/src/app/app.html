@@ -1,0 +1,78 @@
+<div class="todo-container">
+  <header class="todo-header">
+    <h1>{{ title() }}</h1>
+  </header>
+
+  <div class="todo-input-section">
+    <input
+      type="text"
+      class="todo-input"
+      placeholder="What needs to be done?"
+      [(ngModel)]="newTodoTitle"
+      (keyup.enter)="addTodo()"
+      autofocus
+    />
+    <button class="add-button" (click)="addTodo()">Add</button>
+  </div>
+
+  <div class="todo-list" *ngIf="todos().length > 0">
+    <div class="todo-item" *ngFor="let todo of filteredTodos" [class.completed]="todo.completed">
+      <div class="todo-item-content">
+        <input
+          type="checkbox"
+          class="todo-checkbox"
+          [checked]="todo.completed"
+          (change)="toggleTodo(todo.id)"
+        />
+        <span class="todo-title" [class.completed]="todo.completed">
+          {{ todo.title }}
+        </span>
+        <button class="delete-button" (click)="deleteTodo(todo.id)">
+          ×
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="todos().length === 0">
+    <p>No todos yet. Add one above to get started!</p>
+  </div>
+
+  <footer class="todo-footer" *ngIf="todos().length > 0">
+    <span class="todo-count">
+      {{ activeTodoCount }} {{ activeTodoCount === 1 ? 'item' : 'items' }} left
+    </span>
+    
+    <div class="filters">
+      <button
+        class="filter-button"
+        [class.active]="filter() === 'all'"
+        (click)="setFilter('all')"
+      >
+        All
+      </button>
+      <button
+        class="filter-button"
+        [class.active]="filter() === 'active'"
+        (click)="setFilter('active')"
+      >
+        Active
+      </button>
+      <button
+        class="filter-button"
+        [class.active]="filter() === 'completed'"
+        (click)="setFilter('completed')"
+      >
+        Completed
+      </button>
+    </div>
+
+    <button
+      class="clear-completed"
+      *ngIf="activeTodoCount < todos().length"
+      (click)="clearCompleted()"
+    >
+      Clear completed
+    </button>
+  </footer>
+</div>

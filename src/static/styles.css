@@ -654,6 +654,176 @@ footer {
   font-size: 1rem;
 }
 
+/* View Toggle */
+.view-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.view-btn {
+  background-color: var(--background);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-btn.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary-dark);
+}
+
+.view-btn:hover:not(.active) {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+/* Calendar mode overrides for the #activities-list grid */
+#activities-list.calendar-mode {
+  display: block;
+  grid-template-columns: unset;
+  gap: 0;
+}
+
+/* Calendar Grid Layout */
+.calendar-grid {
+  display: flex;
+  min-width: 640px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.time-axis {
+  width: 52px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.time-label {
+  position: absolute;
+  right: 4px;
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  transform: translateY(-50%);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.day-column {
+  flex: 1;
+  min-width: 70px;
+  border-right: 1px solid var(--border);
+}
+
+.day-column:last-child {
+  border-right: none;
+}
+
+.day-header {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.75rem;
+  background: var(--primary);
+  color: white;
+  border-bottom: 1px solid var(--primary-dark);
+}
+
+.day-events {
+  position: relative;
+  background: var(--surface);
+}
+
+.time-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--border-light);
+  pointer-events: none;
+}
+
+.time-grid-line.hour-line {
+  border-top-color: var(--border);
+}
+
+/* Calendar event blocks */
+.calendar-event {
+  position: absolute;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 2px 3px;
+  font-size: 0.65rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: default;
+  z-index: 1;
+  transition: box-shadow 0.15s, z-index 0.15s;
+}
+
+.calendar-event:hover {
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  overflow: visible;
+}
+
+.cal-event-name {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cal-event-enrollment {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+/* Calendar event tooltip */
+.cal-event-tooltip {
+  display: none;
+  position: absolute;
+  left: calc(100% + 4px);
+  top: 0;
+  min-width: 180px;
+  max-width: 230px;
+  background: rgba(33, 33, 33, 0.95);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  z-index: 100;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  white-space: normal;
+}
+
+.cal-event-tooltip.tooltip-left {
+  left: auto;
+  right: calc(100% + 4px);
+}
+
+.cal-event-full {
+  color: #ff8a80;
+}
+
+.calendar-event:hover .cal-event-tooltip {
+  display: block;
+}
+
 #logout-button {
   padding: 3px 10px;
   background-color: rgba(255, 255, 255, 0.2);
